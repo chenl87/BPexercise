@@ -1,0 +1,13 @@
+{
+  "name": "panda-service",
+  "version": "1.0.0",
+  "description": "panda-service",
+  "main": "panda-service.js",
+  "dependencies": {
+    "httpdispatcher": "^1.0.0"
+  },
+  "scripts": {
+    "start": "cd /tmp/panda-service ; nodejs /tmp/panda-service/panda-service.js &",
+    "stop":  "pkill -f panda-service"
+  }
+}

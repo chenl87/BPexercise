@@ -1,0 +1,6 @@
+---
+- name: copy panda service
+  copy: src=panda-service dest=/tmp/ owner=root group=root mode=755
+
+- name: npm install
+  npm: path=/tmp/panda-service

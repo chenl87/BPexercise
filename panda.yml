@@ -6,9 +6,25 @@
     - name: Set hostname
       hostname: name={{inventory_hostname}}
 
-- name: Base bamboo service
-  hosts: base
+- name: Base panda service
+  hosts: panda
   sudo: yes
   roles:
     - { role: nodejs, tags: nodejs }
-    - { role: bamboo, tags: bamboo }
+    - { role: panda, tags: panda }
+
+  tasks:
+  - name: "Install forever (to run Node.js app)."
+    npm: name=forever global=yes state=present
+
+  - name: create symlink for forever to work with nodejs
+    shell: if [ ! -L /usr/bin/node ]; then sudo ln -s /usr/bin/nodejs /usr/bin/node; fi
+
+  - name: "Check list of Node.js apps running."
+    command: forever list
+    register: forever_list
+    changed_when: false
+
+  - name: "Start Panda service."
+    command: forever start /tmp/panda-service/panda-service.js
+    when: "forever_list.stdout.find('/tmp/panda-service/panda-service.js') == -1"

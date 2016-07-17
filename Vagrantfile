@@ -23,7 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network "private_network", type: "dhcp"
 
   # Create a base machine 
-  config.vm.define "base" do |base|
-      base.vm.network :forwarded_port, host: 8080, guest: 8080
+  config.vm.define "panda" do |panda|
+      panda.vm.network :forwarded_port, host: 8080, guest: 8080
   end
 end
