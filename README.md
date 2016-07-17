@@ -13,5 +13,5 @@ To deploy the big-service replace the content of panda.yml with the big.yml cont
 Notes
 =====
 
-- If the code has changed after any of the services was provisioned, the ansible playbook run will redeploy the service in its latest version and rerun the service.
+- If the code has changed after any of the services was provisioned, the ansible playbook run will redeploy the service in its updated version and rerun the service.
 - Both NodeJS services are activated and monitored by the "forever" tool. If the service crashes, forever will rerun it. (Reference: https://www.npmjs.com/package/forever)
