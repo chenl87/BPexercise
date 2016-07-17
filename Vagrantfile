@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "panda.yml"
+    ansible.playbook = "big.yml"
     ansible.inventory_path = "dev"
     ansible.host_key_checking = false
     ansible.extra_vars = { 'ansible_connection' => 'ssh',
@@ -23,7 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network "private_network", type: "dhcp"
 
   # Create a base machine 
-  config.vm.define "panda" do |panda|
-      panda.vm.network :forwarded_port, host: 8080, guest: 8080
+  config.vm.define "big" do |big|
+      big.vm.network :forwarded_port, host: 8080, guest: 8080
   end
 end

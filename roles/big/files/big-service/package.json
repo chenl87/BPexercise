@@ -1,0 +1,13 @@
+{
+  "name": "big-service",
+  "version": "1.0.0",
+  "description": "big-service",
+  "main": "big-service.js",
+  "dependencies": {
+    "httpdispatcher": "^1.0.0"
+  },
+  "scripts": {
+    "start": "cd /tmp/big-service ; nodejs /tmp/big-service/big-service.js &",
+    "stop":  "pkill -f big-service"
+  }
+}

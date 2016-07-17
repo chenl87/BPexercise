@@ -6,13 +6,14 @@
     - name: Set hostname
       hostname: name={{inventory_hostname}}
 
-- name: Base panda service
-  hosts: panda
+- name: Base big service
+  hosts: big
   sudo: yes
   roles:
     - { role: nodejs, tags: nodejs }
-    - { role: panda, tags: panda }
+    - { role: big, tags: big }
 
+  # Install forever - A simple CLI tool for ensuring that a given node script runs continuously
   tasks:
   - name: "Install forever (to run Node.js app)."
     npm: name=forever global=yes state=present
@@ -25,11 +26,11 @@
     register: forever_list
     changed_when: false
 
-  - name: "Start Panda service."
-    command: forever start /tmp/panda-service/panda-service.js
-    when: "forever_list.stdout.find('/tmp/panda-service/panda-service.js') == -1"
+  - name: "Start Big service."
+    command: forever start /tmp/big-service/big-service.js
+    when: "forever_list.stdout.find('/tmp/big-service/big-service.js') == -1"
 
-  - name: "Restart Panda service if it was redeployed"
-    command: forever restart /tmp/panda-service/panda-service.js
-    when: ("forever_list.stdout.find('/tmp/panda-service/panda-service.js') == -1") and
-          (pandacontent.changed)
+  - name: "Restart Big service if it was redeployed"
+    command: forever restart /tmp/big-service/big-service.js
+    when: ("forever_list.stdout.find('/tmp/big-service/big-service.js') == -1") and
+          (bigcontent.changed)

@@ -1,0 +1,7 @@
+---
+- name: copy big service
+  copy: src=big-service dest=/tmp/ owner=root group=root mode=755
+  register: bigcontent
+
+- name: npm install
+  npm: path=/tmp/big-service
